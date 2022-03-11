@@ -75,8 +75,9 @@ public class RewardVideo extends FlutterActivity {
             adSlot = new AdSlot.Builder()
                     .setCodeId(codeId)
                     .setSupportDeepLink(supportDeepLink)
-                    .setRewardName(rewardName) //奖励的名称
-                    .setRewardAmount(rewardAmount)  //奖励的数量
+                    // 4.2.0.3 废弃
+//                    .setRewardName(rewardName) //奖励的名称
+//                    .setRewardAmount(rewardAmount)  //奖励的数量
                     //模板广告需要设置期望个性化模板广告的大小,单位dp,激励视频场景，只要设置的值大于0即可
                     .setExpressViewAcceptedSize(expressViewAcceptedSizeW,expressViewAcceptedSizeH)
                     .setUserID(userID)//用户id,必传参数
@@ -88,8 +89,9 @@ public class RewardVideo extends FlutterActivity {
             adSlot = new AdSlot.Builder()
                     .setCodeId(codeId)
                     .setSupportDeepLink(supportDeepLink)
-                    .setRewardName(rewardName) //奖励的名称
-                    .setRewardAmount(rewardAmount)  //奖励的数量
+                    // 4.2.0.3 废弃
+//                    .setRewardName(rewardName) //奖励的名称
+//                    .setRewardAmount(rewardAmount)  //奖励的数量
                     .setUserID(userID)//用户id,必传参数
                     .setMediaExtra(mediaExtra) //附加参数，可选
                     .setOrientation(orientation) //必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
@@ -107,8 +109,14 @@ public class RewardVideo extends FlutterActivity {
             }
 
             //视频广告加载后，视频资源缓存到本地的回调，在此回调后，播放本地视频，流畅不阻塞。
+            /** @deprecated */
+            @Deprecated
             @Override
-            public void onRewardVideoCached() {
+            public void onRewardVideoCached() { }
+
+//            视频广告加载后，视频资源缓存到本地的回调，在此回调后，播放本地视频，流畅不阻塞。
+            @Override
+            public void onRewardVideoCached(TTRewardVideoAd ad) {
                 if (debug)
                 {
                     Log.e(TAG, "onRewardVideoCached");
@@ -117,10 +125,6 @@ public class RewardVideo extends FlutterActivity {
                 mttRewardVideoAd.showRewardVideoAd(activity, TTAdConstant.RitScenes.CUSTOMIZE_SCENES, "scenes_test");
                 mttRewardVideoAd = null;
             }
-
-            //视频广告加载后，视频资源缓存到本地的回调，在此回调后，播放本地视频，流畅不阻塞。
-            @Override
-            public void onRewardVideoCached(TTRewardVideoAd ad) { }
 
             //视频广告的素材加载完毕，比如视频url等，在此回调后，可以播放在线视频，网络不好可能出现加载缓冲，影响体验。
             @Override

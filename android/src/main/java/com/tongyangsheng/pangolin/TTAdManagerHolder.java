@@ -1,6 +1,7 @@
 package com.tongyangsheng.pangolin;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
@@ -26,10 +27,19 @@ public class TTAdManagerHolder {
     }
 
     //step1:接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明
-    private static void doInit(Context context,String appId,Boolean useTextureView,String appName, Boolean allowShowNotify, Boolean allowShowPageWhenScreenLock, Boolean debug, Boolean supportMultiProcess,List<Integer> directDownloadNetworkType) {
+    private static void doInit(Context context, String appId, Boolean useTextureView, String appName, Boolean allowShowNotify, Boolean allowShowPageWhenScreenLock, Boolean debug, Boolean supportMultiProcess, List<Integer> directDownloadNetworkType) {
         if (!sInit) {
-            TTAdSdk.init(context, buildConfig(context,appId,useTextureView,appName,allowShowNotify,allowShowPageWhenScreenLock,debug,supportMultiProcess,directDownloadNetworkType));
-            sInit = true;
+            TTAdSdk.init(context, buildConfig(context, appId, useTextureView, appName, allowShowNotify, allowShowPageWhenScreenLock, debug, supportMultiProcess, directDownloadNetworkType), new TTAdSdk.InitCallback() {
+                @Override
+                public void success() {
+                    sInit = true;
+                }
+
+                @Override
+                public void fail(int code, String message) {
+                    Log.e("TTAdManagerHolder", "doInit failed: {code: " + code + ", message: " + message + "}");
+                }
+            });
         }
     }
 

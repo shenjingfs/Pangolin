@@ -16,6 +16,7 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://artifact.bytedance.com/repository/pangle' }
     }
 }
 
@@ -36,5 +37,5 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation project(path: ':open_ad_sdk')
+    implementation 'com.pangle.cn:ads-sdk-pro:4.3.0.8'
 }
