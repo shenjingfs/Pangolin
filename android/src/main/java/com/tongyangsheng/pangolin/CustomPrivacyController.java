@@ -15,6 +15,7 @@ public class CustomPrivacyController extends TTCustomController {
         return null;
     }
 
+    // 是否允许SDK主动获取设备上应用安装列表的采集权限
     @Override
     public boolean alist() {
         return false;

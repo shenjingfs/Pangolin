@@ -37,5 +37,5 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.pangle.cn:ads-sdk-pro:4.3.0.8'
+    implementation 'com.pangle.cn:ads-sdk-pro:4.5.2.2'
 }

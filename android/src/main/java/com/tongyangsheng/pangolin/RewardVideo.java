@@ -2,6 +2,7 @@ package com.tongyangsheng.pangolin;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -196,6 +197,17 @@ public class RewardVideo extends FlutterActivity {
                         rewardVideoCallBack.put("rewardAmount",rewardAmount);
                         rewardVideoCallBack.put("rewardName",rewardName);
                         _channel.invokeMethod("onRewardResponse",rewardVideoCallBack);
+                    }
+
+                    // 4.4.0.9 新增，原onRewardVerify废弃但不删除
+                    //视频播放完成后，奖励验证回调，rewardVerify：是否有效，rewardAmount：奖励梳理，bundle：奖励名称
+                    @Override
+                    public void onRewardArrived(boolean rewardVerify, int rewardAmount, Bundle bundle) {
+                        if (debug)
+                        {
+                            TToast.show(context, "verify:" + rewardVerify + " amount:" + rewardAmount +
+                                    " bundle:" + bundle);
+                        }
                     }
 
                     @Override
