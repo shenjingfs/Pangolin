@@ -54,15 +54,10 @@ FlutterMethodChannel* globalMethodChannel;
     {
         NSString* mCodeId = call.arguments[@"mCodeId"];
         
-        [BUAdSDKManager setIsPaidApp:NO];
-        [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
         CGRect frame = [UIScreen mainScreen].bounds;
-        BUSplashAdView *splashView = [[BUSplashAdView alloc] initWithSlotID:mCodeId frame:frame];
-        splashView.delegate = self;
-        UIWindow *keyWindow = [UIApplication sharedApplication].windows.firstObject;
-        [splashView loadAdData];
-        [keyWindow.rootViewController.view addSubview:splashView];
-        splashView.rootViewController = keyWindow.rootViewController;
+        BUSplashAd *splashAd = [[BUSplashAd alloc] initWithSlotID:mCodeId adSize:frame.size];
+        splashAd.delegate = self;
+        [splashAd loadAdData];
     }
     else if([@"loadRewardAd" isEqualToString:call.method])
     {
@@ -147,13 +142,13 @@ FlutterMethodChannel* globalMethodChannel;
 }
 
 // 开屏广告加载失败
-- (void)splashAd:(BUSplashAdView *)splashAd didFailWithError:(NSError * _Nullable)error {
-      [splashAd removeFromSuperview];
+- (void)splashAd:(BUSplashAd *)splashAd didFailWithError:(NSError * _Nullable)error {
+      [splashAd removeSplashView];
 }
 
 //开屏视频关闭
-- (void)splashAdDidClose:(BUSplashAdView *)splashAd {
-    [splashAd removeFromSuperview];
+- (void)splashAdDidClose:(BUSplashAd *)splashAd {
+    [splashAd removeSplashView];
 }
 
 //展示视频用
